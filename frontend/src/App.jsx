@@ -1,9 +1,36 @@
+import { useState, useEffect } from 'react';
 import React from 'react';
 import TranslatorBox from './components/TranslatorBox';
+import axios from 'axios';
 
 export default function App() {
+  /////////// Ví dụ 
+  const [array, setArray] = useState([]);
+
+  const fetchAPI = async () => {
+    const response = await axios.get('http://localhost:5000/api/users');
+    setArray(response.data.users);
+  }
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
+  //////////
+
   return (
+    
     <div className=" h-screen py-10 bg-gradient-to-r from-[#186a5e] to-[#053339] text-[#e1eeeb]" >
+      
+      {/*/////Ví dụ////////*/}
+      <div>
+        {array.map((item, index) => (
+          <div key={index} className="text-center text-2xl font-mono">
+            {item}
+          </div>
+        ))}
+      </div>
+      {/*//////////*/}
+
       <div className="bg-gradient-to-r from-[#0b201d] to-[#021619] rounded-3xl shadow-lg flex-col w-fit mx-auto p-12 gap-4">
       <header className="text-center mb-10">
         <h1 className="font-handjet text-8xl uppercase font-bold">Machine Translator</h1>
