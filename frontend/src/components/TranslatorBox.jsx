@@ -1,18 +1,12 @@
-export default function TranslatorBox({ text, setText }) {
+export default function TranslatorBox({ text, setText, placeholder, disabled }) {
   return (
-    <div className="flex flex-col gap-4">
       <textarea
-        className="w-full h-32 p-2 border border-gray-300 rounded"
+        className="w-[400px] h-32 p-2 borderrounded resize-none bg-gradient-to-r from-[#70f5e1] to-[#4df0f8] text-[#021619] font-mono text-lg rounded-md "
+        style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Enter text to translate..."
+        placeholder={placeholder}
+        disabled={disabled}
       />
-      {/* <button
-        className="bg-blue-500 text-white py-2 px-4 rounded"
-        onClick={() => alert("Translate button clicked!")}
-      >
-        Translate
-      </button> */}
-    </div>
   );
 }
