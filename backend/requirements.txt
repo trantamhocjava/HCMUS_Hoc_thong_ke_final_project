@@ -5,4 +5,5 @@ transformers
 Flask
 flask_cors
 sentencepiece
+gunicorn
 -e .
