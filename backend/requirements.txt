@@ -4,4 +4,5 @@ pandas
 transformers
 Flask
 flask_cors
+sentencepiece
 -e .
