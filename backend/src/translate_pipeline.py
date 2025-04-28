@@ -11,8 +11,9 @@ class TranslationPipeline:
         pass
 
     def translate(self, text):
-        model = AutoModelForSeq2SeqLM.from_pretrained("model_47")
-        tokenizer = AutoTokenizer.from_pretrained("tokenizer")
+        model_id = "trantamjava/machine_translation_en_to_vie_statistics_learning_model"
+        model = AutoModelForSeq2SeqLM.from_pretrained(model_id)
+        tokenizer = AutoTokenizer.from_pretrained(model_id)
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model.to(device)
@@ -25,6 +26,3 @@ class TranslationPipeline:
         translated_text = tokenizer.decode(translated[0], skip_special_tokens=True)
 
         return translated_text
-
-    def demo_setup(self):
-        print("Set up được rồi nhen !!!!!!!")
