@@ -9,7 +9,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
 
   const client = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://transformer-machine-translation-backend.onrender.com'
   });
 
   const submit = async(text) => {
