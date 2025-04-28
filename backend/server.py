@@ -3,7 +3,7 @@ from flask_cors import CORS
 from src.translate_pipeline import TranslationPipeline
 
 app = Flask(__name__)
-cors = CORS(app, origin="*")
+CORS(app, resources={r"/*": {"origins": "*"}})
 app.config["CORS_HEADERS"] = "Content-Type"
 
 
