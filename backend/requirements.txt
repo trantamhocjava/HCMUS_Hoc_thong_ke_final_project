@@ -1,0 +1,7 @@
+torch
+numpy
+pandas
+transformers
+Flask
+flask_cors
+-e .
