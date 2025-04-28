@@ -9,3 +9,10 @@ Lưu ý: trong file requirements.txt có dòng **-e .** ở cuối là để set
 ```
 from src.translate_pipeline import TranslationPipeline
 ```
+
+
+Để test thì làm 2 việc
+- Trong frontend, chạy npm start -> npm run dev -> hiện lên trang web 
+- Trong backend, chạy python server.py 
+
+Sau đó gõ vào khung và xem kết quả 
