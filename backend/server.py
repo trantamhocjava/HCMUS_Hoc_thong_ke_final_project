@@ -4,17 +4,15 @@ from src.translate_pipeline import TranslationPipeline
 
 app = Flask(__name__)
 cors = CORS(app, origin="*")
-
-
-@app.route("/api/users", methods=["GET"])
-def get_users():
-    return jsonify({"users": ["Alice", "Bob", "Charlie"]})
-
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/translate", methods=["POST"])
 def translate_text():
-    text = request.form.get("")
-
+    data = request.json
+    text = data.get("text") if data else None
+    if not text:
+        return jsonify({"error": "No text provided"}), 400
+    return jsonify({"translated_text": text})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -4,32 +4,39 @@ import TranslatorBox from './components/TranslatorBox';
 import axios from 'axios';
 
 export default function App() {
-  /////////// Ví dụ 
-  const [array, setArray] = useState([]);
+  const [text, setText] = useState('');
+  const [translatedText, setTranslatedText] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const fetchAPI = async () => {
-    const response = await axios.get('http://localhost:5000/api/users');
-    setArray(response.data.users);
-  }
+  const client = axios.create({
+    baseURL: 'http://localhost:5000'
+  });
 
-  useEffect(() => {
-    fetchAPI();
-  }, []);
-  //////////
+  const submit = async(text) => {
+    try {
+      setLoading(true); // Set loading to true before API call
+      const response = await client.post('/translate', {
+        text: text
+      });
+      setTranslatedText(response.data.translated_text);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error during translation:', error);
+    } finally {
+      setLoading(false); // Set loading to false after API call completes
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(text);
+    submit(text);
+
+  };
 
   return (
     
     <div className=" h-screen py-10 bg-gradient-to-r from-[#186a5e] to-[#053339] text-[#e1eeeb]" >
-      
-      {/*/////Ví dụ////////*/}
-      <div>
-        {array.map((item, index) => (
-          <div key={index} className="text-center text-2xl font-mono">
-            {item}
-          </div>
-        ))}
-      </div>
-      {/*//////////*/}
 
       <div className="bg-gradient-to-r from-[#0b201d] to-[#021619] rounded-3xl shadow-lg flex-col w-fit mx-auto p-12 gap-4">
       <header className="text-center mb-10">
@@ -38,14 +45,17 @@ export default function App() {
       </header>
 
       <main className="flex flex-row gap-4 justify-center">
-        <TranslatorBox placeholder={"Enter text to translate..."}/>
+        <form className="flex gap-4" onSubmit={handleSubmit}>
+
+        <TranslatorBox text={text} setText={setText} placeholder={"Enter text to translate..."}/>
 
         <button
-          className="bg-[#54a399] hover:bg-[#3c8379] hover:border-[#3c8379] font-handjet text-xl text-white justify-center align-middle py-auto my-auto rounded h-[50px] w-[100px] "
-          onClick={() => alert('Translate button clicked!')}
-        >Translate</button>
+          className="bg-[#54a399] hover:bg-[#3c8379] hover:border-[#3c8379] font-handjet text-xl text-white justify-center align-middle py-auto my-auto rounded h-[50px] w-[100px] " type="submit"
+        >{loading ? 'Loading...' : 'Translate'}</button>
+        
+        </form>
+        <TranslatorBox text={translatedText} disabled={true}  />
 
-        <TranslatorBox disabled={true}  />
       </main>
       </div>
     </div>
