@@ -7,4 +7,5 @@ flask_cors
 sentencepiece
 gunicorn
 sacremoses
+gunicorn[gevent]
 -e .
