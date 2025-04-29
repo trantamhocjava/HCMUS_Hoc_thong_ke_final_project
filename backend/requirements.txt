@@ -8,4 +8,5 @@ sentencepiece
 gunicorn
 sacremoses
 gunicorn[gevent]
+gevent
 -e .
