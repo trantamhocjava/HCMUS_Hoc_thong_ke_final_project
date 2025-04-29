@@ -6,4 +6,5 @@ Flask
 flask_cors
 sentencepiece
 gunicorn
+sacremoses
 -e .
